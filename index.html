@@ -29,34 +29,38 @@
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      display: flex;
-      gap: 30px;
+      display: flex; /* Giữ flex để dễ điều khiển căn giữa */
+      flex-direction: column; /* THAY ĐỔI QUAN TRỌNG: Sắp xếp các phần tử theo chiều dọc */
+      align-items: center; /* Căn giữa các phần tử con theo chiều ngang */
+      gap: 30px; /* Khoảng cách giữa các phần tử xếp dọc */
       margin-bottom: 20px;
     }
     .product-media {
         display: flex;
         flex-direction: column;
-        width: 150px; /* Media size */
+        width: 100%; /* Đảm bảo chiếm hết chiều rộng */
+        max-width: 300px; /* Giới hạn kích thước hình ảnh để không quá lớn */
         flex-shrink: 0;
+        text-align: center; /* Căn giữa ảnh nếu ảnh nhỏ hơn max-width */
     }
-    .product-media img,
-    .product-media video {
+    .product-media img {
       width: 100%;
       height: auto;
       border-radius: 8px;
     }
-    .product-media video {
-        margin-bottom: 10px;
-    }
     .product-info {
         flex-grow: 1;
+        width: 100%; /* Đảm bảo chiếm hết chiều rộng */
+        max-width: 600px; /* Giới hạn chiều rộng nội dung thông tin */
+        text-align: center; /* Căn giữa nội dung */
     }
     .product-info h2 {
       margin: 0;
       font-size: 22px;
     }
     .product-info p {
-      margin: 8px 0;
+      margin: 8px auto; /* Căn giữa đoạn văn */
+      max-width: 400px; /* Giới hạn chiều rộng đoạn văn để dễ đọc */
     }
     .btn-buy {
       display: inline-block;
@@ -73,22 +77,29 @@
         background: #1c5fd1;
     }
     
-    /* CSS được thêm vào cho khung chứa video mới */
+    /* CSS đã được chỉnh sửa cho bố cục dọc và video Google Drive */
     .secondary-media {
-        flex-basis: 450px; /* Chiều rộng cho khu vực nhúng video */
+        flex-basis: auto; /* Tự động điều chỉnh */
         flex-shrink: 0;
-        align-self: flex-start;
-        height: 253px; /* Chiều cao cố định ~ 16:9 cho 450px width */
+        align-self: center; /* Căn giữa video khi xếp dọc */
+        width: 100%; /* Chiếm hết chiều rộng có thể */
+        max-width: 500px; /* Giới hạn kích thước video */
+        height: auto; /* Chiều cao tự động */
+        aspect-ratio: 16 / 9; /* Giữ tỷ lệ 16:9 cho video */
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         border-radius: 8px;
         overflow: hidden;
+        position: relative; /* Cần thiết cho iframe bên trong */
     }
     .secondary-media iframe {
+        position: absolute; /* Để iframe chiếm toàn bộ khu vực */
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
         border: none; /* Xóa viền mặc định của iframe */
     }
-    /* Kết thúc CSS cho video */
+    /* Kết thúc CSS mới */
     
     footer {
       text-align: center;
