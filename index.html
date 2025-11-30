@@ -50,7 +50,6 @@
     }
     .product-info {
         flex-grow: 1;
-        /* Giữ cho thông tin sản phẩm và nút bên trái */
     }
     .product-info h2 {
       margin: 0;
@@ -74,7 +73,12 @@
         background: #1c5fd1;
     }
     
-    /* Các CSS tùy chỉnh cho video đã được xóa khỏi đây */
+    /* CSS mới được thêm vào để tạo khoảng trống */
+    .secondary-media {
+        flex-basis: 450px; /* Đặt chiều rộng cho khoảng trống */
+        flex-shrink: 0;
+        align-self: flex-start;
+    }
 
     footer {
       text-align: center;
@@ -110,8 +114,11 @@
         <a class="btn-buy" href="page2.html">View Details</a>
       </div>
       
+      <div class="secondary-media">
       </div>
+      
+    </div>
   </div>
   <footer>&copy; 2025 - locator Product Website</footer>
-  </body>
+</body>
 </html>
