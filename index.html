@@ -72,6 +72,24 @@
     .btn-buy:hover {
         background: #1c5fd1;
     }
+    
+    /* CSS được thêm vào cho khung chứa video mới */
+    .secondary-media {
+        flex-basis: 450px; /* Chiều rộng cho khu vực nhúng video */
+        flex-shrink: 0;
+        align-self: flex-start;
+        height: 253px; /* Chiều cao cố định ~ 16:9 cho 450px width */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .secondary-media iframe {
+        width: 100%;
+        height: 100%;
+        border: none; /* Xóa viền mặc định của iframe */
+    }
+    /* Kết thúc CSS cho video */
+    
     footer {
       text-align: center;
       padding: 20px;
@@ -86,7 +104,6 @@
     <div class="product-card">
       
       <div class="product-media">
-        
         <img 
             src="https://cdn.discordapp.com/attachments/1367406363579383898/1444698275029717064/e1889d62-7a86-4e82-bd20-0fd65651d0c0.png?ex=692da79d&is=692c561d&hm=bf9f89b582622d9299c6fd452a38e6b9e96f3cd7e75f7acf3bf20fd9fb528dc8" 
             alt="Product secondary image" 
@@ -98,7 +115,15 @@
         <h2>Product Name:Locator</h2>
         <a class="btn-buy" href="page2.html">View Details</a>
       </div>
-    </div>
+      
+      <div class="secondary-media">
+        <iframe 
+            src="https://drive.google.com/file/d/1YdyrE1Hba0BwSHoTbEwxjut0w8TAyjB0/preview" 
+            allow="autoplay" 
+            allowfullscreen
+        ></iframe>
+      </div>
+      </div>
   </div>
   <footer>&copy; 2025 - locator Product Website</footer>
 </body>
