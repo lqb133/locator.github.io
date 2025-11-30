@@ -73,12 +73,19 @@
         background: #1c5fd1;
     }
     
-    /* CSS mới được thêm vào để tạo khoảng trống */
+    /* CSS cho khung chứa video */
     .secondary-media {
-        flex-basis: 450px; /* Đặt chiều rộng cho khoảng trống */
+        flex-basis: 450px; /* Chiều rộng tối đa cho khung chứa video */
         flex-shrink: 0;
         align-self: flex-start;
     }
+    .secondary-media > div {
+        max-width: 100%;
+        border-radius: 8px;
+        overflow: hidden; /* Cắt góc tròn cho video */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    /* Kết thúc CSS cho video */
 
     footer {
       text-align: center;
@@ -115,10 +122,20 @@
       </div>
       
       <div class="secondary-media">
+        <div style="padding:56.25% 0 0 0;position:relative;">
+            <iframe 
+                src="https://player.vimeo.com/video/1141820463?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1" 
+                frameborder="0" 
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+                title="0f1e6f29-d864-42f0-bd87-4250825e8404">
+            </iframe>
+        </div>
       </div>
-      
-    </div>
+      </div>
   </div>
   <footer>&copy; 2025 - locator Product Website</footer>
+  <script src="https://player.vimeo.com/api/player.js"></script>
 </body>
 </html>
