@@ -73,19 +73,22 @@
         background: #1c5fd1;
     }
 
-    /* CSS được thêm vào để hỗ trợ khung video responsive */
+    /* CSS đã được chỉnh sửa cho mã nhúng IFRAME từ Google Drive */
     .secondary-media {
-        flex-basis: 450px; /* Chiều rộng tối đa cho khung chứa video */
+        flex-basis: 450px; /* Chiều rộng cho khu vực nhúng video mới */
         flex-shrink: 0;
         align-self: flex-start;
-    }
-    .secondary-media > div {
-        max-width: 100%;
-        border-radius: 8px;
-        overflow: hidden; /* Cắt góc tròn cho video */
+        height: 253px; /* Chiều cao cố định ~ 16:9 cho 450px width */
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        border-radius: 8px;
+        overflow: hidden;
     }
-    /* Kết thúc CSS cho video */
+    .secondary-media iframe {
+        width: 100%;
+        height: 100%;
+        border: none; /* Xóa viền mặc định của iframe */
+    }
+    /* Kết thúc CSS mới */
 
     footer {
       text-align: center;
@@ -101,15 +104,9 @@
     <div class="product-card">
       
       <div class="product-media">
-        <video 
-            src="https://images-ext-1.discordapp.net/external/_iGfJwdQs8AkjzUCmrprn2FYiwwBy6_3M2JBJYAiE7E/https/media.tenor.com/SIUNC-c2MBoAAAPo/downsign-up.mp4" 
-            controls 
-            loop 
-            muted 
-            alt="Product demonstration video"
-        ></video>
         
-        <img 
+
+<img 
             src="https://cdn.discordapp.com/attachments/1367406363579383898/1444698275029717064/e1889d62-7a86-4e82-bd20-0fd65651d0c0.png?ex=692da79d&is=692c561d&hm=bf9f89b582622d9299c6fd452a38e6b9e96f3cd7e75f7acf3bf20fd9fb528dc8" 
             alt="Product secondary image" 
         />
@@ -122,20 +119,14 @@
       </div>
       
       <div class="secondary-media">
-        <div style="padding:56.25% 0 0 0;position:relative;">
-            <iframe 
-                src="https://player.vimeo.com/video/1141822010?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;loop=1" 
-                frameborder="0" 
-                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin" 
-                style="position:absolute;top:0;left:0;width:100%;height:100%;" 
-                title="0f1e6f29-d864-42f0-bd87-4250825e8404">
-            </iframe>
-        </div>
+        <iframe 
+            src="https://drive.google.com/file/d/1YdyrE1Hba0BwSHoTbEwxjut0w8TAyjB0/preview" 
+            allow="autoplay" 
+            allowfullscreen
+        ></iframe>
       </div>
       </div>
   </div>
   <footer>&copy; 2025 - locator Product Website</footer>
-  <script src="https://player.vimeo.com/api/player.js"></script>
 </body>
 </html>
