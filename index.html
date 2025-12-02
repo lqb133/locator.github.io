@@ -10,7 +10,33 @@
       margin: 0;
       padding: 0;
       background: #f5f5f5;
+      /* Thêm perspective để bật các hiệu ứng 3D */
+      perspective: 1000px; 
     }
+    
+    /* === 1. Hiệu ứng Fade-In cho Header và Product Card === */
+    @keyframes fadeInZoom {
+        from {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    @keyframes slideInDown {
+        from {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
     header {
       background: #2b7cff;
       color: #fff;
@@ -18,6 +44,8 @@
       text-align: center;
       font-size: 24px;
       font-weight: bold;
+      /* Áp dụng animation cho Header */
+      animation: slideInDown 0.6s ease-out forwards; 
     }
     .container {
       max-width: 1000px;
@@ -29,19 +57,35 @@
       padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      display: flex; /* Giữ flex để dễ điều khiển căn giữa */
-      flex-direction: column; /* THAY ĐỔI QUAN TRỌNG: Sắp xếp các phần tử theo chiều dọc */
-      align-items: center; /* Căn giữa các phần tử con theo chiều ngang */
-      gap: 30px; /* Khoảng cách giữa các phần tử xếp dọc */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
       margin-bottom: 20px;
+      
+      /* Thêm Transition cho hiệu ứng hover lắc nhẹ */
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease; 
+      
+      /* Áp dụng animation cho Product Card */
+      opacity: 0; /* Bắt đầu ẩn */
+      animation: fadeInZoom 0.8s ease-out 0.3s forwards; /* Trễ 0.3s sau header */
     }
+    
+    /* === 3. Hiệu ứng Lắc nhẹ khi Hover (Product Card) === */
+    .product-card:hover {
+        /* Dịch chuyển nhẹ Y để tạo hiệu ứng "nổi lên" */
+        transform: translateY(-5px); 
+        /* Thay đổi đổ bóng để nổi bật hơn */
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
+    }
+    
     .product-media {
         display: flex;
         flex-direction: column;
-        width: 100%; /* Đảm bảo chiếm hết chiều rộng */
-        max-width: 300px; /* Giới hạn kích thước hình ảnh để không quá lớn */
+        width: 100%;
+        max-width: 300px;
         flex-shrink: 0;
-        text-align: center; /* Căn giữa ảnh nếu ảnh nhỏ hơn max-width */
+        text-align: center;
     }
     .product-media img {
       width: 100%;
@@ -50,17 +94,17 @@
     }
     .product-info {
         flex-grow: 1;
-        width: 100%; /* Đảm bảo chiếm hết chiều rộng */
-        max-width: 600px; /* Giới hạn chiều rộng nội dung thông tin */
-        text-align: center; /* Căn giữa nội dung */
+        width: 100%;
+        max-width: 600px;
+        text-align: center;
     }
     .product-info h2 {
       margin: 0;
       font-size: 22px;
     }
     .product-info p {
-      margin: 8px auto; /* Căn giữa đoạn văn */
-      max-width: 400px; /* Giới hạn chiều rộng đoạn văn để dễ đọc */
+      margin: 8px auto;
+      max-width: 400px;
     }
     .btn-buy {
       display: inline-block;
@@ -71,41 +115,50 @@
       border-radius: 8px;
       text-decoration: none;
       font-weight: bold;
-      transition: background 0.3s;
-    }
-    .btn-buy:hover {
-        background: #1c5fd1;
+      
+      /* Thêm Transition cho nút mua */
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
     }
     
-    /* CSS đã được chỉnh sửa cho bố cục dọc và video Google Drive */
+    /* === 2. Hiệu ứng Hover 3D nhẹ (Buy Button) === */
+    .btn-buy:hover {
+        background: #1c5fd1;
+        /* Xoay nhẹ theo trục Y và dịch chuyển Z để tạo hiệu ứng 3D */
+        transform: perspective(1000px) rotateY(2deg) scale(1.05); 
+        /* Thêm đổ bóng mờ để tăng cảm giác nổi */
+        box-shadow: 0 5px 15px rgba(43, 124, 255, 0.5);
+    }
+    
     .secondary-media {
-        flex-basis: auto; /* Tự động điều chỉnh */
+        flex-basis: auto;
         flex-shrink: 0;
-        align-self: center; /* Căn giữa video khi xếp dọc */
-        width: 100%; /* Chiếm hết chiều rộng có thể */
-        max-width: 500px; /* Giới hạn kích thước video */
-        height: auto; /* Chiều cao tự động */
-        aspect-ratio: 16 / 9; /* Giữ tỷ lệ 16:9 cho video */
+        align-self: center;
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        aspect-ratio: 16 / 9;
         box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         border-radius: 8px;
         overflow: hidden;
-        position: relative; /* Cần thiết cho iframe bên trong */
+        position: relative;
     }
     .secondary-media iframe {
-        position: absolute; /* Để iframe chiếm toàn bộ khu vực */
+        position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        border: none; /* Xóa viền mặc định của iframe */
+        border: none;
     }
-    /* Kết thúc CSS mới */
     
     footer {
       text-align: center;
       padding: 20px;
       background: #eee;
       margin-top: 30px;
+      /* Áp dụng animation cho Footer */
+      opacity: 0; 
+      animation: slideInDown 0.6s ease-out 1.2s forwards; /* Trễ hơn để xuất hiện sau cùng */
     }
   </style>
 </head>
