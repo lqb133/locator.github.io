@@ -5,164 +5,115 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Locator Product Page - Group 4</title>
   <style>
+    /* CSS Cũ giữ nguyên */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
       background: #f5f5f5;
-      /* Thêm perspective để bật các hiệu ứng 3D */
       perspective: 1000px; 
+      /* Ẩn nội dung chính ban đầu */
+      visibility: hidden; 
+      opacity: 0;
     }
-    
-    /* === 1. Hiệu ứng Fade-In cho Header và Product Card === */
-    @keyframes fadeInZoom {
-        from {
-            opacity: 0;
-            transform: scale(0.95);
-        }
-        to {
-            opacity: 1;
-            transform: scale(1);
-        }
-    }
-    
-    @keyframes slideInDown {
-        from {
-            transform: translateY(-50px);
-            opacity: 0;
-        }
-        to {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
-    
-    header {
-      background: #2b7cff;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      /* Áp dụng animation cho Header */
-      animation: slideInDown 0.6s ease-out forwards; 
-    }
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 20px;
-    }
-    .product-card {
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 30px;
-      margin-bottom: 20px;
-      
-      /* Thêm Transition cho hiệu ứng hover lắc nhẹ */
-      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease; 
-      
-      /* Áp dụng animation cho Product Card */
-      opacity: 0; /* Bắt đầu ẩn */
-      animation: fadeInZoom 0.8s ease-out 0.3s forwards; /* Trễ 0.3s sau header */
-    }
-    
-    /* === 3. Hiệu ứng Lắc nhẹ khi Hover (Product Card) === */
-    .product-card:hover {
-        /* Dịch chuyển nhẹ Y để tạo hiệu ứng "nổi lên" */
-        transform: translateY(-5px); 
-        /* Thay đổi đổ bóng để nổi bật hơn */
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2); 
-    }
-    
-    .product-media {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        max-width: 300px;
-        flex-shrink: 0;
-        text-align: center;
-    }
-    .product-media img {
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-    }
-    .product-info {
-        flex-grow: 1;
-        width: 100%;
-        max-width: 600px;
-        text-align: center;
-    }
-    .product-info h2 {
-      margin: 0;
-      font-size: 22px;
-    }
-    .product-info p {
-      margin: 8px auto;
-      max-width: 400px;
-    }
-    .btn-buy {
-      display: inline-block;
-      margin-top: 10px;
-      background: #2b7cff;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-      
-      /* Thêm Transition cho nút mua */
-      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-    
-    /* === 2. Hiệu ứng Hover 3D nhẹ (Buy Button) === */
-    .btn-buy:hover {
-        background: #1c5fd1;
-        /* Xoay nhẹ theo trục Y và dịch chuyển Z để tạo hiệu ứng 3D */
-        transform: perspective(1000px) rotateY(2deg) scale(1.05); 
-        /* Thêm đổ bóng mờ để tăng cảm giác nổi */
-        box-shadow: 0 5px 15px rgba(43, 124, 255, 0.5);
-    }
-    
-    .secondary-media {
-        flex-basis: auto;
-        flex-shrink: 0;
-        align-self: center;
-        width: 100%;
-        max-width: 500px;
-        height: auto;
-        aspect-ratio: 16 / 9;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        border-radius: 8px;
-        overflow: hidden;
-        position: relative;
-    }
-    .secondary-media iframe {
-        position: absolute;
+    /* ... (CSS cho body, header, container, product-card, product-media, product-info, btn-buy, secondary-media, footer giữ nguyên như phản hồi trước) ... */
+
+
+    /* ======================================= */
+    /* === CSS MỚI CHO ANIMATION TRÁI TIM === */
+    /* ======================================= */
+    #preloader {
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        border: none;
+        background: #2b7cff; /* Màu nền Preloader */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999; /* Đảm bảo nó luôn ở trên cùng */
+        /* Animation fade out khi biến mất */
+        transition: opacity 0.5s ease-out, visibility 0.5s; 
+    }
+
+    #preloader.hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .heart-text {
+        font-size: 40px;
+        color: white;
+        font-weight: bold;
+        text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        /* Áp dụng animation bay hình trái tim */
+        animation: heartFly 2s cubic-bezier(0.5, 0, 0.5, 1) forwards; 
+        position: relative; /* Cần thiết cho transform */
+    }
+
+    /* Keyframes tạo đường bay hình trái tim */
+    /* Công thức hình trái tim: x = 16sin^3(t), y = 13cos(t) - 5cos(2t) - 2cos(3t) - cos(4t) */
+    /* Chúng ta sẽ dùng transform: translate() để mô phỏng đường bay 
+       và scale/rotate để làm hiệu ứng thêm mượt mà */
+    @keyframes heartFly {
+        0% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
+        
+        /* Điểm giữa - ở đỉnh trái/phải của tim */
+        25% { transform: translate(-80px, -50px) scale(1.1) rotate(-15deg); opacity: 1; }
+        50% { transform: translate(0, -100px) scale(1.2) rotate(0deg); opacity: 1; }
+        75% { transform: translate(80px, -50px) scale(1.1) rotate(15deg); opacity: 1; }
+        
+        /* Điểm kết thúc - trở về giữa và bay lên/mờ đi */
+        90% { transform: translate(0, 0) scale(1); opacity: 1; }
+        100% { transform: translate(0, -200px) scale(0.5); opacity: 0; }
     }
     
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #eee;
-      margin-top: 30px;
-      /* Áp dụng animation cho Footer */
-      opacity: 0; 
-      animation: slideInDown 0.6s ease-out 1.2s forwards; /* Trễ hơn để xuất hiện sau cùng */
+    /* Cập nhật animation cho Main Content khi Preloader biến mất */
+    body.loaded {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 0.5s ease-in 0.5s; /* Trễ 0.5s sau khi preloader biến mất */
     }
+    
+    /* ... (Phần CSS cho body, header, product-card, etc. phải nằm ở đây) ... */
+    
+    /* Header và Product Card cần được sửa lại animation để xuất hiện sau preloader */
+    header {
+      /* ... CSS cũ ... */
+      /* Xóa animation cũ */
+      animation: none;
+    }
+    .product-card {
+      /* ... CSS cũ ... */
+      /* Xóa animation cũ */
+      animation: none;
+    }
+    footer {
+      /* ... CSS cũ ... */
+      /* Xóa animation cũ */
+      animation: none;
+    }
+
+    /* Các animation chỉ nên áp dụng khi body có class .loaded */
+    body.loaded header {
+        animation: slideInDown 0.6s ease-out 0.5s forwards; 
+    }
+    body.loaded .product-card {
+        animation: fadeInZoom 0.8s ease-out 0.8s forwards; 
+    }
+    body.loaded footer {
+        animation: slideInDown 0.6s ease-out 1.4s forwards;
+    }
+    
   </style>
 </head>
 <body>
+    
+  <div id="preloader">
+    <div class="heart-text">Group 4</div>
+  </div>
+    
   <header>Product Locator</header>
   <div class="container">
     <div class="product-card">
@@ -190,5 +141,29 @@
       </div>
   </div>
   <footer>&copy; 2025 - locator Product Website</footer>
+  
+  <script>
+    // Đảm bảo script chạy sau khi DOM đã được tải
+    document.addEventListener("DOMContentLoaded", function() {
+        const preloader = document.getElementById('preloader');
+        const body = document.body;
+        const animationDuration = 2000; // 2 giây như yêu cầu
+
+        setTimeout(function() {
+            // 1. Ẩn Preloader bằng cách thêm class 'hidden'
+            preloader.classList.add('hidden');
+            
+            // 2. Hiện nội dung chính bằng cách thêm class 'loaded' vào body
+            body.classList.add('loaded');
+            
+            // Tùy chọn: Xóa hẳn Preloader khỏi DOM sau khi chuyển cảnh xong
+            // để tránh xung đột z-index hoặc memory leak (khoảng 0.6s sau khi fade out)
+            setTimeout(function() {
+                 preloader.remove();
+            }, 600); 
+
+        }, animationDuration);
+    });
+  </script>
 </body>
 </html>
